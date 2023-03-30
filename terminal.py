@@ -210,6 +210,7 @@ else:
                         print(f"Error: Command '{cmds_list[index][:cmds_list[index].index(' ')]}' does not exist.")
                     else:
                         print(f"Error: Command '{cmds_list[index]}' does not exist.")
+        file.close()
         login_screen()
 
     if __name__ == '__main__':
