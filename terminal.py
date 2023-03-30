@@ -94,6 +94,11 @@ else:
         if f'{username} {password}' not in usersList:
             with open(fileLocation + "/users.txt", 'a') as users_append:
                 users_append.write(f'{username} {password}\n')
+            os.chdir(fileLocation)
+            if getos() == 'Windows':
+                os.system('copy default_data/.* data/test/')
+            else:
+                os.system('cp ')
             os.chdir(fileLocation + '/data')
             try:
                 os.mkdir(username)
@@ -158,7 +163,12 @@ else:
         users.close()
 
     def runterminal(user):
-
+        # run startup commands
+        startup = file.open(fileLocation + f'data/{user}/.startup').read()
+        
+        file.close()
+        
+        
         startdir = os.getcwd().replace(backslash, "/").replace(user, '~', 1).split("/")
         cmd = ''
         os.chdir(fileLocation + f'/data/{user}')
