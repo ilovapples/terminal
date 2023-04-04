@@ -1,0 +1,131 @@
+---
+mkdir: |-
+  try:
+      os.mkdir(args[0])
+  except IndexError:
+      print("Usage: mkdir <folder_to_create>")
+  except:
+      print(f"Error: Directory '{args[0]}' already exists.")
+rmdir: |-
+  try:
+    for i in args:
+        if getos() == "Windows":
+            os.system(f"rmdir /s {i}"),
+        else:
+            os.system(f"rmdir {i}")
+  except IndexError:
+      print("Usage: rmdir <folder1> <folder2> ... ")
+mkfile: |-
+  try:
+      file = open(args[0]], "x")
+      file.close()
+  except IndexError:
+      print("Usage: mkfile <file_to_create>")
+  except:
+      print(f"Error: File '{args[0]}' already exists.")
+rmfile: |-
+  try:
+    if getos() == "Windows":
+        for i in args:
+            os.system(f"del {i}")
+    elif getos() == "Linux":
+        for i in args:
+            os.system(f"rm {i}")
+  except IndexError:
+      print("Usage: rmfile <file1> <file2> ... ")
+cd: |-
+  try:
+      if cmd.strip() == "cd":
+          os.chdir(fileLocation + f"/data/{user}")
+      else:
+          os.chdir(args[0])
+  except IndexError:
+      os.chdir(fileLocation + f"/data/{user}")
+  except:
+      print(f"Error: Directory '{args[0]}' does not exist.")
+write: |-
+  try:
+    if args[0] in os.listdir():
+        with open(args[0], 'w') as file:
+            final = ''
+            line = ''
+            while line != '!:exit':
+                line = input('')
+                if line != '!:exit':
+                    final += line + '\n'
+                    file.write(final)
+    else:
+        print(f"Error: File '{args[0]}' does not exist.")
+  except IndexError:
+      print("Usage: write <file_to_write_to>")
+ls -a: |-
+  for i in os.listdir():
+      if os.path.isdir(i):
+          print(tim.parse(f"[dodgerblue]{i}"))
+      elif os.path.isfile(i):
+          print(i)
+ls: |-
+  for i in os.listdir():
+      if not i.startswith("."):
+          if os.path.isdir(i):
+              tim.print(f"[dodgerblue]{i}")
+          else:
+              print(i)
+read: |-
+  try:
+      with open(args[0]) as test1:
+          print(test1.read())
+  except IndexError:
+      print("Usage: read <file_to_read_from>")
+  except:
+      print(f"Error: File '{args[0]}' does not exist.")
+# deluser: |-
+#   if cmd.strip() == "deluser":
+#       username = input("Username: ")
+#   else:
+#       username = args[0]
+#       userpassword = input("Password: ")    
+#       if login(username, userpassword) == 0:
+#           if getos() == "Windows":
+#               os.system(f"rmdir /s {fileLocation + '/data/' + username}")
+#           else:
+#               os.system(f"rm -r {fileLocation + '/data/' + username}")
+#           print(f"User '{username}' deleted.")
+#       elif login(username, userpassword) == 1:
+#           print("The username or password is incorrect.")
+#       else:
+#           print("That user doesn't exist.")
+clear: |-
+  if getos() == "Windows":
+      os.system("cls")
+  else:
+      os.system("clear")
+py: |-
+  try:
+    if args[0] in os.listdir():
+        if getos() == 'Windows':
+            os.system(f"py {args[0]}")
+        else:
+            os.system(f"python3 {args[0]}")
+    else:
+        print(f"Error: File '{args[0]}' does not exist.")
+  except IndexError:
+      if getos() == 'Windows':
+        os.system('py')
+      else:
+        os.system('python3')
+stop: |-
+  file.close()
+  quit()
+exit: |-
+  file.close()
+  quit()
+example: print("this command is an example")
+run: |-
+  try:
+    with open(args[0], 'r') as file:
+        script = file.read()
+        for cmd in script.split('\n'):
+            runcmd(cmd.strip(), user)
+  except IndexError:
+      print("Usage: run <file_to_run>")
