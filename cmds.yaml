@@ -124,8 +124,13 @@ example: print("this command is an example")
 run: |-
   try:
     with open(args[0], 'r') as file:
-        script = file.read()
-        for cmd in script.split('\n'):
-            runcmd(cmd.strip(), user)
+      script = file.read()
+      for cmd in script.split('\n'):
+        runcmd(cmd.strip(), user)
   except IndexError:
-      print("Usage: run <file_to_run>")
+    print("Usage: run <file_to_run>")
+edit: |-
+  try:
+    os.system(f"nano {args[0]}")
+  except IndexError:
+    print("Usage: edit <file_to_edit>")
