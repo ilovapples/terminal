@@ -2,6 +2,7 @@
 print("Importing modules...")
 import os
 from platform import system as getos
+# Try to import 'getkey' from 'getkey', prompt to install if not installed
 try:
     from getkey import getkey
 except ModuleNotFoundError:
@@ -15,6 +16,7 @@ except ModuleNotFoundError:
         else:
             os.system('python3 terminal.py')
     quit()
+# Try to import 'tim' from 'pytermgui', prompt to install if not installed
 try:
     from pytermgui import tim
 except ModuleNotFoundError:
