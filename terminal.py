@@ -84,7 +84,7 @@ else:
     with open('cmds.yaml', 'r') as cmds:
         commands = yaml.safe_load(cmds.read())
 
-    userfile = file.open(fileLocation + "/users.txt", 'r')
+    userfile = file.open(fileLocation + "/.users.txt", 'r')
     usersList = userfile.read()
 
 
@@ -123,7 +123,7 @@ else:
 
     def create_account(username, password):
         if f'{username} {password}' not in usersList:
-            with open(fileLocation + "/users.txt", 'a') as users_append:
+            with open(fileLocation + "/.users.txt", 'a') as users_append:
                 users_append.write(f'{username} {password}\n')
             os.chdir(fileLocation)
                 
@@ -151,7 +151,7 @@ else:
 
 
     def login(username, password):
-        with open(fileLocation + "/users.txt", "r") as userlist:
+        with open(fileLocation + "/.users.txt", "r") as userlist:
             userPasswordList = [i.split(' ') for i in userlist.read().strip().split('\n')]
 
             for pair in userPasswordList:
@@ -169,7 +169,7 @@ else:
             userlist.close()
 
     def login_screen():
-        users = file.open(fileLocation + "/users.txt")
+        users = file.open(fileLocation + "/.users.txt")
         if users.read().strip() == '':
             print("You don't currently have any accounts, so you are being redirected to the account creation screen.")
             create_account_screen()
