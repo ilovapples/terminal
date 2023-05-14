@@ -2,5 +2,5 @@ rmdir data /S /Q
 md data
 type nul > data/placeholder.txt
 
-echo '' > users.txt
-echo 'default' > dir.txt
+type nul > .users.txt
+type 'default' > dir.txt

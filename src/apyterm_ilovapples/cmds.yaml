@@ -45,32 +45,58 @@ cd: |-
       print(f"Error: Directory '{args[0]}' does not exist.")
 write: |-
   try:
-    if args[0] in os.listdir():
-        with open(args[0], 'w') as file:
-            final = ''
-            line = ''
-            while line != '!:exit':
-                line = input('')
-                if line != '!:exit':
-                    final += line + '\n'
-                    file.write(final)
-    else:
-        print(f"Error: File '{args[0]}' does not exist.")
+      if args[0] in os.listdir():
+          with open(args[0], 'w') as file:
+              final = ''
+              line = ''
+              while line != '!:exit':
+                  line = input('')
+                  if line != '!:exit':
+                      final += line + '\n'
+                      file.write(final)
+      else:
+          print(f"Error: File '{args[0]}' does not exist.")
   except IndexError:
       print("usage: write file_to_write_to")
-ls -a: |-
-  for i in os.listdir():
-      if os.path.isdir(i):
-          print(tim.parse(f"[dodgerblue]{i}"))
-      elif os.path.isfile(i):
-          print(i)
+# ls -a: |-
+#   for i in os.listdir():
+#       if os.path.isdir(i):
+#           print(tim.parse(f"[dodgerblue]{i}"))
+#       elif os.path.isfile(i):
+#           print(i)
 ls: |-
-  for i in os.listdir():
-      if not i.startswith("."):
-          if os.path.isdir(i):
-              tim.print(f"[dodgerblue]{i}")
+  term_size = os.get_terminal_size()
+  line_length = 0
+  cols = term_size.columns
+  if len(args) >= 1:
+      if args[0] == '-a':
+          for i in os.listdir():
+              if not line_length + len(i) >= cols:
+                  if os.path.isdir(i):
+                      print(tim.parse(f"[dodgerblue]{i}"), end=' ')
+                  elif os.path.isfile(i):
+                      print(i, end=' ')
+              else:
+                  if os.path.isdir(i):
+                      print('\n' + tim.parse(f"[dodgerblue]{i}"), end=' ')
+                  else:
+                      print('\n' + i, end=' ')
+          print()
+  else:
+      for i in os.listdir():
+          if not line_length + len(i) >= cols:
+              if not i.startswith("."):
+                  if os.path.isdir(i):
+                      tim.print(f"[dodgerblue]{i}", end=' ')
+                  else:
+                      print(i, end=' ')
           else:
-              print(i)
+              if not i.startswith("."):
+                  if os.path.isdir(i):
+                      print('\n' + tim.parse(f"[dodgerblue]{i}"), end=' ')
+                  else:
+                      print('\n' + i, end=' ')
+      print()
 read: |-
   try:
       with open(args[0]) as test1:
@@ -155,6 +181,13 @@ wget: |-
       afile.write(downloaded_file.content)
       print(f"Downloaded:  {file_name}")
   except IndexError:
-    print("usage: wget url [destination]")
-    print("    url: the URL of the file to download")
-    print("    destination: the (optional) destination name of the file downloaded.")
+      print("usage: wget url [destination]")
+      print("    url: the URL of the file to download")
+      print("    destination: the (optional) destination name of the file downloaded.")
+echo: |-
+  try:
+      for i in args:
+          print(i, end='')
+      print()
+  except:
+      print('usage: echo string1 [string2 ...]')

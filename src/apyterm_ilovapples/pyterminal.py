@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+print("Importing modules...")
 import os
 from platform import system as getos
 
@@ -32,10 +33,7 @@ except ModuleNotFoundError:
     quit()
 import yaml
 
-print("Importing modules...")
 print("Finished importing modules!")
-
-
 
 
 class OpenFiles:
@@ -106,11 +104,7 @@ else:
             a_cmd = [False for _ in cmds_list]
         # iterate over all commands in command
         for index, cur_cmd in enumerate(cmds_list):
-            if cur_cmd.startswith("ls -a"):
-                args = cmd.split(' ')[1:]
-                exec(commands['ls -a'])
-                a_cmd[index] = True
-            elif cur_cmd.startswith("ls"):
+            if cur_cmd.startswith("ls"):
                 args = cmd.split(' ')[1:]
                 exec(commands['ls'])
                 a_cmd[index] = True
@@ -131,18 +125,20 @@ else:
 
 
     def create_account(username, password):
-        if f'{username} {password}' not in usersList:
+        if f'{username} {password}' not in usersList and not os.path.isdir(f'{fileLocation}/data/{username}'):
             with open(fileLocation + "/.users.txt", 'a') as users_append:
                 users_append.write(f'{username} {password}\n')
             os.chdir(fileLocation)
 
-            os.chdir(fileLocation + '/data')
-            os.mkdir(username)
-            os.chdir('../../..')
-
+            try:
+                os.mkdir(f'{fileLocation}/data/{username}')
+                print()
+            except:
+                print('')
             if getos() != 'Windows':
                 os.system(f'cp -r {fileLocation}/default_data/* {fileLocation}/data/{username}')
-                os.system(f'cp -r {fileLocation}/default_data/.* {fileLocation}/data/{username}')
+                os.system(f'cp -r {fileLocation}/default_data/.startup {fileLocation}/data/{username}')
+                os.system(f'wget https://github.com/ilovapples/terminal/tree/main/README.md {fileLocation}/data/{username}')
         else:
             print("That account already exists.")
 
@@ -209,10 +205,13 @@ else:
         # for i in startup.split('\n'):
         #     runcmd(i, user)
         file.close()
+        
 
         startdir = os.getcwd().replace(backslash, "/").replace(user, '~', 1).split("/")
         cmd = ''
         os.chdir(fileLocation + f'/data/{user}')
+        
+        runcmd('run .startup', user)
         while cmd != 'logout':
             directory = (os.getcwd().replace(backslash, "/").replace(user, '~', 1).split("/"))[len(startdir):]
             usingdir = ""
