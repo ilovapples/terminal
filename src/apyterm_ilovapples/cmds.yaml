@@ -3,7 +3,7 @@ mkdir: |-
   try:
       os.mkdir(args[0])
   except IndexError:
-      print("Usage: mkdir <folder_to_create>")
+      print("usage: mkdir <folder_to_create>")
   except:
       print(f"Error: Directory '{args[0]}' already exists.")
 rmdir: |-
@@ -14,13 +14,13 @@ rmdir: |-
         else:
             os.system(f"rmdir {i}")
   except IndexError:
-      print("Usage: rmdir <folder1> <folder2> ... ")
+      print("usage: rmdir <folder1> <folder2> ... ")
 mkfile: |-
   try:
       file = open(args[0]], "x")
       file.close()
   except IndexError:
-      print("Usage: mkfile <file_to_create>")
+      print("usage: mkfile <file_to_create>")
   except:
       print(f"Error: File '{args[0]}' already exists.")
 rmfile: |-
@@ -32,7 +32,7 @@ rmfile: |-
         for i in args:
             os.system(f"rm {i}")
   except IndexError:
-      print("Usage: rmfile <file1> <file2> ... ")
+      print("usage: rmfile file1 [file2 ...] ")
 cd: |-
   try:
       if cmd.strip() == "cd":
@@ -57,7 +57,7 @@ write: |-
     else:
         print(f"Error: File '{args[0]}' does not exist.")
   except IndexError:
-      print("Usage: write <file_to_write_to>")
+      print("usage: write file_to_write_to")
 ls -a: |-
   for i in os.listdir():
       if os.path.isdir(i):
@@ -76,8 +76,8 @@ read: |-
       with open(args[0]) as test1:
           print(test1.read())
   except IndexError:
-      print("Usage: read <file_to_read_from>")
-  except:
+      print("usage: read file_to_read_from")
+  except FileNotFoundError:
       print(f"Error: File '{args[0]}' does not exist.")
 # deluser: |-
 #   if cmd.strip() == "deluser":
@@ -120,7 +120,8 @@ stop: |-
 exit: |-
   file.close()
   quit()
-example: print("this command is an example")
+example: |-
+  print("this command is an example")
 run: |-
   try:
     with open(args[0], 'r') as file:
@@ -128,9 +129,32 @@ run: |-
       for cmd in script.split('\n'):
         runcmd(cmd.strip(), user)
   except IndexError:
-    print("Usage: run <file_to_run>")
+    print("usage: run file_to_run")
 edit: |-
   try:
     os.system(f"nano {args[0]}")
   except IndexError:
-    print("Usage: edit <file_to_edit>")
+    print("usage: edit file_to_edit")
+wget: |-
+  try:
+    import requests
+    downloaded_file = requests.get(
+      args[0],
+      allow_redirects=True,
+      timeout=10
+    )
+
+    if len(args) >= 2:
+      file_name = args[1]
+    else:
+      if '\\' in args[0] or '/' in args[0]:
+        file_name = args[0][args[0].replace('\\', '/').rindex('/')+1:]
+      else:
+        file_name = args[0]
+    with open(file_name, 'wb') as afile:
+      afile.write(downloaded_file.content)
+      print(f"Downloaded:  {file_name}")
+  except IndexError:
+    print("usage: wget url [destination]")
+    print("    url: the URL of the file to download")
+    print("    destination: the (optional) destination name of the file downloaded.")
