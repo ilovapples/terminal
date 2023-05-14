@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+src/apyterm_ilovapples/__init__.py
+src/apyterm_ilovapples/pyterminal.py
+src/apyterm_ilovapples.egg-info/PKG-INFO
+src/apyterm_ilovapples.egg-info/SOURCES.txt
+src/apyterm_ilovapples.egg-info/dependency_links.txt
+src/apyterm_ilovapples.egg-info/top_level.txt

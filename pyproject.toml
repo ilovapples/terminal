@@ -1,21 +1,22 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "apyterm"
+name = "apyterm_ilovapples"
+version = "1.0.0"
 authors = [
-    {name = "Asher Grossman", email = "ashergrossman185@gmail.com"},
+  { name="ilovapples", email="ilovapples515@gmail.com" },
 ]
-description = "A simple terminal emulator built with Python."
+description = "A terminal-ish package (with extendable commands)"
 readme = "README.md"
 requires-python = ">=3.7"
-keywords = ["one", "two"]
-license = {text = "BSD-3-Clause"}
 classifiers = [
     "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
 ]
-dependencies = [
-    "pytermgui",
-]
-dynamic = ["version"]
+
+[project.urls]
+"Homepage" = "https://github.com/ilovapples/terminal"
+"Bug Tracker" = "https://github.com/ilovapples/terminal/issues"

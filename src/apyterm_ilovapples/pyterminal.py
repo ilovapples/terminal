@@ -1,47 +1,54 @@
 #!/usr/bin/env python3
-print("Importing modules...")
 import os
 from platform import system as getos
-# Try to import 'getkey' from 'getkey', prompt to install if not installed
+
 try:
     from getkey import getkey
 except ModuleNotFoundError:
-    print("You need to install the 'getkey' module. Run 'pip install getkey' in your terminal.")
+    print("You need to install the 'getkey' module. Run 'pip install getkey' in your pyterminal.")
     install = input("Automatically install 'getkey'? (Y/n): ").lower()
     if install.lower() == 'y':
         os.system('pip3 install getkey')
         print("The program will now restart to continue.\n")
         if getos() == 'Windows':
-            os.system('py terminal.py')
+            os.system('py pyterminal.py')
         else:
-            os.system('python3 terminal.py')
+            os.system('python3 pyterminal.py')
     quit()
-# Try to import 'tim' from 'pytermgui', prompt to install if not installed
 try:
     from pytermgui import tim
 except ModuleNotFoundError:
-    print("You need to install the 'pytermgui' module. Run 'pip install pytermgui' in your terminal.")
+    print("You need to install the 'pytermgui' module. Run 'pip install pytermgui' in your pyterminal.")
     install = input("Automatically install 'pytermgui'? (Y/n): ").lower()
     if install.lower() == 'y':
         os.system('pip3 install pytermgui')
         print("The program will now restart to continue.\n")
         if getos() == 'Windows':
-            os.system('py terminal.py')
+            os.system('py pyterminal.py')
         else:
-            os.system('python3 terminal.py')
+            os.system('python3 pyterminal.py')
     quit()
-import json, yaml
+import yaml
+
+print("Importing modules...")
 
 
-class OpenFiles():
+# Try to import 'getkey' from 'getkey', prompt to install if not installed
+# Try to import 'tim' from 'pytermgui', prompt to install if not installed
+
+
+class OpenFiles:
     def __init__(self):
         self.files = []
+
     def open(self, file_name, mode='r'):
         f = open(file_name, mode)
         self.files.append(f)
         return f
+
     def close(self):
         list(map(lambda f: f.close(), self.files))
+
 
 file = OpenFiles()
 
@@ -52,13 +59,13 @@ if fileLocation == 'default':
         print("Setting base directory...\n")
         os.system('set_dir.bat')
         print("The program will now restart to continue.\n")
-        os.system('python3 terminal.py')
+        os.system('python3 pyterminal.py')
         quit()
     else:
         print("Setting base directory...\n")
         os.system('bash set_dir.sh')
         print("The program will now restart to continue.\n")
-        os.system('python3 terminal.py')
+        os.system('python3 pyterminal.py')
         quit()
 else:
 
@@ -86,8 +93,8 @@ else:
     with open('cmds.yaml', 'r') as cmds:
         commands = yaml.safe_load(cmds.read())
 
-    userfile = file.open(fileLocation + "/.users.txt", 'r')
-    usersList = userfile.read()
+    user_file = file.open(fileLocation + "/.users.txt", 'r')
+    usersList = user_file.read()
 
 
     def runcmd(cmd: str, user: str):
@@ -95,25 +102,24 @@ else:
         cmds_list = [cmd.strip()]
         if " && " in cmd:
             cmds_list = [i.strip() for i in cmd.split(" && ")]
-            a_cmd = [False for i in cmds_list]
+            a_cmd = [False for _ in cmds_list]
         # iterate over all commands in command
-        for index, icmd in enumerate(cmds_list):
-            if icmd.startswith("ls -a"):
+        for index, cur_cmd in enumerate(cmds_list):
+            if cur_cmd.startswith("ls -a"):
                 args = cmd.split(' ')[1:]
                 exec(commands['ls -a'])
                 a_cmd[index] = True
-            elif icmd.startswith("ls"):
+            elif cur_cmd.startswith("ls"):
                 args = cmd.split(' ')[1:]
                 exec(commands['ls'])
                 a_cmd[index] = True
             else:
                 # check if the chosen command exists, and if so, run it
                 for i in commands:
-                    if icmd.startswith(i):
+                    if cur_cmd.startswith(i):
                         args = cmd.split(' ')[1:]
                         exec(commands[i])
                         a_cmd[index] = True
-
 
         for index, i in enumerate(a_cmd):
             if not i:
@@ -128,13 +134,10 @@ else:
             with open(fileLocation + "/.users.txt", 'a') as users_append:
                 users_append.write(f'{username} {password}\n')
             os.chdir(fileLocation)
-                
+
             os.chdir(fileLocation + '/data')
-            try:
-                os.mkdir(username)
-            except:
-                print()
-            os.chdir('..')
+            os.mkdir(username)
+            os.chdir('../../..')
 
             if getos() != 'Windows':
                 os.system(f'cp -r {fileLocation}/default_data/* {fileLocation}/data/{username}')
@@ -153,10 +156,10 @@ else:
 
 
     def login(username, password):
-        with open(fileLocation + "/.users.txt", "r") as userlist:
-            userPasswordList = [i.split(' ') for i in userlist.read().strip().split('\n')]
+        with open(fileLocation + "/.users.txt", "r") as user_list:
+            user_password_list = [i.split(' ') for i in user_list.read().strip().split('\n')]
 
-            for pair in userPasswordList:
+            for pair in user_password_list:
                 if username == pair[0]:
                     if password == pair[1]:
                         # return status code 0 if password is correct and user exists (successful login)
@@ -168,7 +171,8 @@ else:
                 else:
                     # return status code 2 if user does not exist
                     return 2
-            userlist.close()
+            user_list.close()
+
 
     def login_screen():
         users = file.open(fileLocation + "/.users.txt")
@@ -183,7 +187,7 @@ else:
                 print(f"You are successfully logged in to the '{username}' account!")
                 runterminal(username)
             elif login(username, password) == 1:
-                print("\nEither The username or password you inputed is incorrect.")
+                print("\nEither The username or password you inputted is incorrect.")
                 login_screen()
             else:
                 print(f"The user '{username}' does not exist! Do you want to create an account? (Y/n): ")
@@ -196,6 +200,7 @@ else:
                         login_screen()
         users.close()
 
+
     def runterminal(user):
         # run startup commands
         # startupfile = file.open(fileLocation + f'data/{user}/.startup', 'r')
@@ -203,29 +208,21 @@ else:
         # for i in startup.split('\n'):
         #     runcmd(i, user)
         file.close()
-        
+
         startdir = os.getcwd().replace(backslash, "/").replace(user, '~', 1).split("/")
         cmd = ''
         os.chdir(fileLocation + f'/data/{user}')
         while cmd != 'logout':
-            dir = (os.getcwd().replace(backslash, "/").replace(user, '~', 1).split("/"))[len(startdir):]
+            directory = (os.getcwd().replace(backslash, "/").replace(user, '~', 1).split("/"))[len(startdir):]
             usingdir = ""
-            for i in dir:
+            for i in directory:
                 usingdir += i + '/'
             usingdir = usingdir.replace('data/', '')
-
-
 
             # DEFINE TERMINAL PROMPT
             prompt = tim.parse(f'[royalblue]{user}: {usingdir} $ ')
 
-
-
-
-
-
-            userfile.close()
-
+            user_file.close()
 
             cmd = input(prompt)
 
@@ -233,8 +230,8 @@ else:
         file.close()
         login_screen()
 
+
     if __name__ == '__main__':
         login_screen()
-
 
     file.close()
