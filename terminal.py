@@ -2,6 +2,7 @@
 print("Importing modules...")
 import os
 from platform import system as getos
+# Try to import 'getkey' from 'getkey', prompt to install if not installed
 try:
     from getkey import getkey
 except ModuleNotFoundError:
@@ -15,6 +16,7 @@ except ModuleNotFoundError:
         else:
             os.system('python3 terminal.py')
     quit()
+# Try to import 'tim' from 'pytermgui', prompt to install if not installed
 try:
     from pytermgui import tim
 except ModuleNotFoundError:
@@ -28,7 +30,7 @@ except ModuleNotFoundError:
         else:
             os.system('python3 terminal.py')
     quit()
-import json
+import json, yaml
 
 
 class OpenFiles():
@@ -81,30 +83,62 @@ else:
     }
 
     # Console Commands
-    with open('cmds.json', 'r') as cmds:
-        commands = json.loads(cmds.read())
+    with open('cmds.yaml', 'r') as cmds:
+        commands = yaml.safe_load(cmds.read())
 
-    userfile = file.open(fileLocation + "/users.txt", 'r')
+    userfile = file.open(fileLocation + "/.users.txt", 'r')
     usersList = userfile.read()
 
 
+    def runcmd(cmd: str, user: str):
+        a_cmd = [False]
+        cmds_list = [cmd.strip()]
+        if " && " in cmd:
+            cmds_list = [i.strip() for i in cmd.split(" && ")]
+            a_cmd = [False for i in cmds_list]
+        # iterate over all commands in command
+        for index, icmd in enumerate(cmds_list):
+            if icmd.startswith("ls -a"):
+                args = cmd.split(' ')[1:]
+                exec(commands['ls -a'])
+                a_cmd[index] = True
+            elif icmd.startswith("ls"):
+                args = cmd.split(' ')[1:]
+                exec(commands['ls'])
+                a_cmd[index] = True
+            else:
+                # check if the chosen command exists, and if so, run it
+                for i in commands:
+                    if icmd.startswith(i):
+                        args = cmd.split(' ')[1:]
+                        exec(commands[i])
+                        a_cmd[index] = True
+
+
+        for index, i in enumerate(a_cmd):
+            if not i:
+                if ' ' in cmds_list[index]:
+                    print(f"Error: Command '{cmds_list[index][:cmds_list[index].index(' ')]}' does not exist.")
+                else:
+                    print(f"Error: Command '{cmds_list[index]}' does not exist.")
 
 
     def create_account(username, password):
         if f'{username} {password}' not in usersList:
-            with open(fileLocation + "/users.txt", 'a') as users_append:
+            with open(fileLocation + "/.users.txt", 'a') as users_append:
                 users_append.write(f'{username} {password}\n')
             os.chdir(fileLocation)
-            if getos() == 'Windows':
-                os.system('copy default_data/.* data/test/')
-            else:
-                os.system('cp ')
+                
             os.chdir(fileLocation + '/data')
             try:
                 os.mkdir(username)
             except:
                 print()
             os.chdir('..')
+
+            if getos() != 'Windows':
+                os.system(f'cp -r {fileLocation}/default_data/* {fileLocation}/data/{username}')
+                os.system(f'cp -r {fileLocation}/default_data/.* {fileLocation}/data/{username}')
         else:
             print("That account already exists.")
 
@@ -119,7 +153,7 @@ else:
 
 
     def login(username, password):
-        with open(fileLocation + "/users.txt", "r") as userlist:
+        with open(fileLocation + "/.users.txt", "r") as userlist:
             userPasswordList = [i.split(' ') for i in userlist.read().strip().split('\n')]
 
             for pair in userPasswordList:
@@ -137,7 +171,7 @@ else:
             userlist.close()
 
     def login_screen():
-        users = file.open(fileLocation + "/users.txt")
+        users = file.open(fileLocation + "/.users.txt")
         if users.read().strip() == '':
             print("You don't currently have any accounts, so you are being redirected to the account creation screen.")
             create_account_screen()
@@ -164,10 +198,11 @@ else:
 
     def runterminal(user):
         # run startup commands
-        startup = file.open(fileLocation + f'data/{user}/.startup').read()
-        
+        # startupfile = file.open(fileLocation + f'data/{user}/.startup', 'r')
+        # startup = startupfile.read()
+        # for i in startup.split('\n'):
+        #     runcmd(i, user)
         file.close()
-        
         
         startdir = os.getcwd().replace(backslash, "/").replace(user, '~', 1).split("/")
         cmd = ''
@@ -193,33 +228,8 @@ else:
 
 
             cmd = input(prompt)
-            a_cmd = [False]
-            cmds_list = [cmd.strip()]
-            if " && " in cmd:
-                cmds_list = [cmd.strip() for i in cmd.split(" && ")]
-                a_cmd = [False for i in cmds_list]
-            # iterate over all commands in command
-            for index, icmd in enumerate(cmds_list):
-                if icmd.startswith("ls -a"):
-                    exec(commands['ls -a'])
-                    a_cmd[index] = True
-                elif icmd.startswith("ls"):
-                    exec(commands['ls'])
-                    a_cmd[index] = True
-                else:
-                    # check if the chosen command exists, and if so, run it
-                    for i in commands:
-                        if icmd.startswith(i):
-                            exec(commands[i])
-                            a_cmd[index] = True
 
-
-            for index, i in enumerate(a_cmd):
-                if not i:
-                    if ' ' in cmds_list[index]:
-                        print(f"Error: Command '{cmds_list[index][:cmds_list[index].index(' ')]}' does not exist.")
-                    else:
-                        print(f"Error: Command '{cmds_list[index]}' does not exist.")
+            runcmd(cmd, user)
         file.close()
         login_screen()
 
