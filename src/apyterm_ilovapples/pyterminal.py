@@ -52,6 +52,11 @@ class OpenFiles:
         list(map(lambda f: f.close(), self.files))
 
 
+if not os.path.isfile('dir.txt'):
+    if getos() == 'Windows':
+        os.system('create_files.bat')
+    else:
+        os.system('bash create_files.sh')
 file = OpenFiles()
 
 fileLocation_file = file.open('dir.txt', 'r')
