@@ -17,7 +17,7 @@ rmdir: |-
       print("usage: rmdir <folder1> <folder2> ... ")
 mkfile: |-
   try:
-      file = open(args[0]], "x")
+      file = open(args[0], "x")
       file.close()
   except IndexError:
       print("usage: mkfile <file_to_create>")

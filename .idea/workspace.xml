@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="131bbb0f-e9fd-4e3f-9fec-82f0705d4748" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/create_files.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apyterm_ilovapples/cmds.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/cmds.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apyterm_ilovapples/create_files.bat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apyterm_ilovapples/pyterminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/pyterminal.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

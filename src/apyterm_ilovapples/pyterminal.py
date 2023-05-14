@@ -72,6 +72,7 @@ cp README.md default_data/README.md"""
     with open('create_files.sh', 'w') as file:
         file.write(content)
     os.system('bash create_files.sh')
+
 file = OpenFiles()
 
 fileLocation_file = file.open('dir.txt', 'r')
