@@ -4,41 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="131bbb0f-e9fd-4e3f-9fec-82f0705d4748" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/dist/apyterm_ilovapples-1.0.0-py3-none-any.whl" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/apyterm_ilovapples-1.0.0.tar.gz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apyterm_ilovapples.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apyterm_ilovapples.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apyterm_ilovapples.egg-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/.users.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/data/placeholder.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/data/test/data/placeholder.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/terminal.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.users.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples.egg-info/dependency_links.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmds.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/cmds.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/placeholder.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test/.startup" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/data/test/.startup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/data/test/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/data/test/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test/cmds.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/data/test/cmds.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test/data/placeholder.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test/data/test/.startup" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/data/test/data/test/.startup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/test/data/test/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/data/test/data/test/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default_data/.startup" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/default_data/.startup" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/default_data/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/default_data/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dir.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/dir.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reset.bat" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/reset.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reset.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/reset.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/set_dir.bat" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/set_dir.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/set_dir.sh" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/set_dir.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/terminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/apyterm_ilovapples/pyterminal.py" afterDir="false" />
-    </list>
+    <list default="true" id="131bbb0f-e9fd-4e3f-9fec-82f0705d4748" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
